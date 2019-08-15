@@ -150,8 +150,8 @@ Humanoid.prototype.greet = function(){
     this.damage = attrs.damage;
   }
   Villain.prototype = Object.create(Humanoid.prototype);
-  Villain.prototype.attackHero = function(){
-    return `${this.name} attacks with magic for ${this.damage}`;
+  Villain.prototype.attackHero = function(obj){
+    return `${this.name} attacks with magic for ${this.damage} to ${obj.name}`;
   }
 
   function Hero(attrs){
@@ -159,8 +159,8 @@ Humanoid.prototype.greet = function(){
     this.damage = attrs.damage;
   }
   Hero.prototype = Object.create(Humanoid.prototype);
-  Hero.prototype.attackVillain = function(){
-    return `${this.name} attacks with might for ${this.damage}`;
+  Hero.prototype.attackVillain = function(obj){
+    return `${this.name} attacks with might for ${this.damage} to ${obj.name}`;
   }
 
   const badGuy = new Villain({
@@ -207,10 +207,10 @@ console.log(badGuy.healthPoints);
 while(goodGuy.healthPoints > 0 && badGuy.healthPoints > 0){
   var chance = Math.random()*10;
   if(chance>=4){
-    console.log(goodGuy.attackVillain());
+    console.log(goodGuy.attackVillain(badGuy));
     badGuy.healthPoints = badGuy.healthPoints - goodGuy.damage;
   }else{
-    console.log(badGuy.attackHero());
+    console.log(badGuy.attackHero(goodGuy));
     goodGuy.healthPoints = goodGuy.healthPoints - badGuy.damage;
   }
   console.log(`${goodGuy.name}'s health: ${goodGuy.healthPoints}; ${badGuy.name}'s health : ${badGuy.healthPoints}.`);
